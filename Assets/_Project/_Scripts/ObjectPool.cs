@@ -16,7 +16,7 @@ public class ObjectPool<T>
     public ObjectPool(Func<T> createFunc, Action<T> onGet, Action<T> onRelease, Action<T> onDestroy = null)
     {
         pool = new Stack<T>();
-        
+
         this.createFunc = createFunc;
         this.onGet = onGet;
         this.onRelease = onRelease;
@@ -25,7 +25,7 @@ public class ObjectPool<T>
     }
 
     public T Get()
-    {       
+    {
         var obj = pool.Count > 0 ? pool.Pop() : createFunc();
         onGet(obj);
         waitedObjects++;
